@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="js-name-input" onkeyup="
+        showMessage();
+    ">
+
+    <p class="js-display-message"></p>
+
+    <script>
+        function showMessage() {
+            const inputElement = document.querySelector('.js-name-input');
+            document.querySelector('.js-display-message').innerHTML = inputElement.value;
+        }
+    </script>
+</body>
+</html>
