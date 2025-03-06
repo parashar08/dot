@@ -1,0 +1,17 @@
+{
+  "name": "episode-02",
+  "version": "1.0.0",
+  "description": "This is react learning zone.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Priyanshu Singh",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.3"
+  }
+}
