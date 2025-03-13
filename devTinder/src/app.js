@@ -2,9 +2,19 @@ const express = require('express');
 
 const app = express();
 
-app.use("/getUserData", (req, res, next) => {
-    throw new Error("error in getUserData!");
-});
+// app.use("/getUserData", (req, res, next) => {
+//     throw new Error("error in getUserData!");
+//     res.send("user data has been sent!");
+// });
+
+app.use("/getUserData", (req, res) => {
+    try {
+        throw new Error("error while fetching data from db!");
+        res.send("data has been sent!");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
 
 app.use("/", (err, req, res, next) => {
     if (err) {
