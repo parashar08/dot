@@ -4,23 +4,29 @@ const User = require('./models/user');
 
 const app = express();
 
-app.post("/signup", async (req, res) => {
-    const userObject = {
-        firstName: "priyanshu",
-        lastName: "singh",
-        emailId: "priyanshuparashar08@gmail.com",
-        gender: "male"
-    };
-    // creating a new instance of user model
-    const user = new User(userObject);
+app.post("/signup", async (req, res, next) => {
+    try {
+        const userObject = {
+            firstName: "sachin",
+            lastName: "tendulkar",
+            emailId: "sachin@gmail.com",
+            gender: "male",
+            password: "sachin@123",
+        };
 
-    await user.save();
-    res.send(`data save successfully \n ${user}`)
+        // creating a new instance of user model
+        const user = new User(userObject);
+        await user.save();
+        res.send(`data save successfully \n ${user}`)
+    } catch (err) {
+        // next(err);
+    }
 });
 
 app.use("/", (err, req, res, next) => {
-    if (err) {
-        res.status(500).send("something went wrong!");
+    console.log("from /");
+    if (err) { 
+        res.status(500).send(`something went wrong!`);
     }
 })
 
