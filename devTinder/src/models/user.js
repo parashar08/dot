@@ -1,29 +1,44 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
     {
         firstName: {
-            type: String
+            type: String,
         },
         lastName: {
-            type: String
+            type: String,
+            validate(value) {
+                if (typeof value !== String) {
+                    throw new Error("value is not string");
+                }
+            },
         },
         emailId: {
-            type: String
+            type: String,
         },
         password: {
-            type: String
+            type: String,
         },
         age: {
-            type: Number
+            type: Number,
         },
         gender: {
-            type: String
-        }
+            type: String,
+        },
     },
     { timestamps: true }
 );
 
-const User = mongoose.model('User', userSchema);
+userSchema.methods.getJWT = async function () {
+    return await jwt.sign({ _id: this._id }, "hdf%87ekdjfk", {
+        expiresIn: "7d",
+    });
+};
+
+userSchema.meth;
+
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
