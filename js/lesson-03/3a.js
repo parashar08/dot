@@ -1,1 +1,0 @@
-text = 'My name is: ';
