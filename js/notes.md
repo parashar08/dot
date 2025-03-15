@@ -28,3 +28,9 @@
 -   || (OR) -> find first truthy value, if all operand is false then return last operand
 -   && (AND) -> find first falsy value, if all operand is truthy then return last operand
 -   ?? -> return fist defined value (return first arg. if its not null/undefined otherwise second arg.)
+-   If a same-named variable is declared inside the function then it shadows the outer one.
+-   Functions are actions. So their name is usually a verb.
+-   in js function is treated as value
+-   Function Declaration is only visible inside the code block in which it resides.
+-   Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
+-   Function Expressions are created when the execution flow reaches them.
