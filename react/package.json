@@ -1,0 +1,19 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "learning react",
+  "keywords": [
+    "react",
+    "reactDOM"
+  ],
+  "license": "ISC",
+  "author": "Priyanshu Singh",
+  "type": "commonjs",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.14.4"
+  }
+}
