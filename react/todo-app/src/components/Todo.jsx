@@ -31,6 +31,17 @@ const Todo = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleTodoDelete = (todo) => {
+    const updatedTodo = todoArray.filter(
+      (originalTodo) => originalTodo != todo
+    );
+    setTodoArray(updatedTodo);
+  };
+
+  const handleAllTodo = () => {
+    setTodoArray([]);
+  };
+
   return (
     <div className="bg-gray-800 h-screen w-full">
       <section className="text-center py-8">
@@ -67,13 +78,22 @@ const Todo = () => {
                 <button>
                   <MdCheck />
                 </button>
-                <button>
+                <button
+                  className="bg-yellow-600 p-1 rounded-md cursor-pointer"
+                  onClick={() => handleTodoDelete(todo)}
+                >
                   <MdDelete />
                 </button>
               </li>
             );
           })}
         </ul>
+        <button
+          onClick={handleAllTodo}
+          className="mt-4 cursor-pointer text-center bg-red-800 px-4 py-2 text-white font-bold rounded-md"
+        >
+          Clear All
+        </button>
       </section>
     </div>
   );
