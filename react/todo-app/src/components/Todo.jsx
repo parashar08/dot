@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdCheck, MdDelete } from "react-icons/md";
 
 const Todo = () => {
   const [todoInput, setTodoInput] = useState("");
   const [todoArray, setTodoArray] = useState([]);
+  const [dateTime, setDateTime] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -17,10 +18,24 @@ const Todo = () => {
     setTodoInput("");
   };
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const now = new Date();
+      const formattedData =
+        now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear();
+
+      const formattedTime = now.toLocaleTimeString();
+      setDateTime(`${formattedData} - ${formattedTime}`);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="bg-gray-800 h-screen w-full">
       <section className="text-center py-8">
         <h1 className="text-2xl font-bold text-yellow-400">Todo List</h1>
+        <h2 className="text-xl font-bold text-white mt-4">{dateTime}</h2>
       </section>
       <section>
         <form
