@@ -2,29 +2,43 @@ import { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import TodoDateTime from "./TodoDateTime";
+import { setLocalStorageTodo, getLocalStorageTodo } from "./TodoLocalStorage";
 
 const Todo = () => {
-  const [todoArray, setTodoArray] = useState([]);
+  const [todoArray, setTodoArray] = useState(getLocalStorageTodo());
 
   const handleFormSubmit = (todoInput, setTodoInput) => {
-    if (!todoInput) return;
-    if (todoArray.includes(todoInput)) {
-      setTodoInput("");
-      return;
-    }
-    setTodoArray((prev) => [...prev, todoInput]);
-    setTodoInput("");
+    const { id, content, checked } = todoInput;
+    if (!content) return;
+    const ifTodoContentMatch = todoArray.find(
+      (todo) => todo.content === content
+    );
+    if (ifTodoContentMatch) return;
+    setTodoArray((prev) => [...prev, { id, content, checked }]);
   };
+
+  setLocalStorageTodo(todoArray);
 
   const handleTodoDelete = (todo) => {
     const updatedTodo = todoArray.filter(
-      (originalTodo) => originalTodo != todo
+      (originalTodo) => originalTodo.content != todo
     );
     setTodoArray(updatedTodo);
   };
 
   const handleAllTodo = () => {
     setTodoArray([]);
+  };
+
+  const handleCheckedTodo = (data) => {
+    const updatedTodo = todoArray.map((todo) => {
+      if (todo.content === data) {
+        return { ...todo, checked: !todo.checked };
+      } else {
+        return todo;
+      }
+    });
+    setTodoArray(updatedTodo);
   };
 
   return (
@@ -40,8 +54,10 @@ const Todo = () => {
             return (
               <TodoList
                 key={index}
-                data={todo}
+                data={todo.content}
+                checked={todo.checked}
                 onHandleDeleteTodo={handleTodoDelete}
+                onHandleCheckedTodo={handleCheckedTodo}
               />
             );
           })}
